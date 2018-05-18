@@ -7,10 +7,10 @@ export default class ProjectCard extends Component {
     render() {
 
         return (
-            <Card title={ this.props.projects.name }
+            <Card featuredSubtitle={ this.props.projects.name }
                     image={ require('../images/deathstar.png') } 
             >
-                <Button title="View Projects" />
+                <Button backgroundColor="blue" title="View Projects" onPress={ this.props.Navigate } />
             </Card>
 
 

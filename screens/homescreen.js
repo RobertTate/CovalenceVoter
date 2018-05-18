@@ -4,6 +4,12 @@ import ProjectCard from '../components/projectcard';
 
 
 export default class HomeScreen extends Component {
+
+    static navigationOptions = {
+        title: 'Covalence Projects'
+    }
+
+
     constructor(props) {
         super(props);
         this.state = {
@@ -11,23 +17,36 @@ export default class HomeScreen extends Component {
         };
     }
 
-    componentDidMount() {
-        this.setState({
-            projects: [
-                { name: 'Test Project 1', description: 'Cool Project!'},
-                { name: 'Test Project 2', description: 'Cool Project!'},
-                { name: 'Test Project 3', description: 'Cool Project!'},
-                { name: 'Test Project 4', description: 'Cool Project!'}
-            ],
-        });
+    async componentDidMount() {
+        let projects = await this.fetchProjects();
+        this.setState({ projects });
+    }
+
+    async fetchProjects() {
+        try {
+            let result = await fetch({ url: 'https://gravity.covalence.io/api/graduation/projects' })
+            let projects = await result.json();
+            return projects;
+        } catch (err) {
+            console.log(err);
+            return;
+        }
+    }
+
+
+    navigate(project) {
+        this.props.navigation.navigate('ProjectTab', { project });
     }
 
     render() {
-        return(
+        return (
             <ScrollView style={styles.container}>
-                { this.state.projects.map((project, index) =>{
-                    return <ProjectCard key={index} projects={project} />
-                }) }
+                {this.state.projects.map((project, index) => {
+                    return (
+                        <ProjectCard key={index} projects={project}
+                            Navigate={() => { this.navigate(project) }}
+                        />)
+                })}
             </ScrollView>
 
 
@@ -40,7 +59,6 @@ export default class HomeScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 40,
         paddingLeft: 10,
         paddingRight: 10
     }
