@@ -8,3 +8,4 @@ YellowBox.ignoreWarnings([
 ]);
 
 AppRegistry.registerComponent('CovalenceVoter', () => App);
+    

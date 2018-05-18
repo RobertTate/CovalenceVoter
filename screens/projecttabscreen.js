@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { TabNavigator } from 'react-navigation';
 
-import ProjectDetailScreen from './projectdetailscreen';
-import ProjectStudentScreen from './projectstudents';
 
-const TabNavigation = TabNavigator({
-    ProjectDetail: { screen: ProjectDetailScreen },
-    StudentScreen: { screen: ProjectStudentScreen }
-});
 
 export default class ProjectTabScreen extends Component {
 

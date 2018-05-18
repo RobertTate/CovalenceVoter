@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import { StackNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 
 import HomeScreen from './screens/homescreen';
-import ProjectTabScreen from './screens/projecttabscreen';
+import ProjectDetailScreen from './screens/projectdetailscreen';
+import ProjectStudentScreen from './screens/projectstudents';
 
+const TabNavigation = TabNavigator({
+  ProjectDetail: { screen: ProjectDetailScreen },
+  StudentScreen: { screen: ProjectStudentScreen }
+});
 
 const RootNavigator = StackNavigator({
   Home: { screen: HomeScreen },
-  ProjectTab: { screen: ProjectTabScreen }
+  ProjectTab: { screen: TabNavigation }
   }, { 
     initialRouteName: 'Home'
   });
